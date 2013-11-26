@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="TrabalhoFinalPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>TrabalhoFinal</jta-data-source>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Ambiente</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Atividade</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.CategoriaEvento</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Cliente</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Compra</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.CompraIngresso</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Email</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Endereco</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Evento</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Ingresso</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Organizador</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Parceiro</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.ParceiroEvento</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Pessoa</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Setor</class>
+    <class>br.edu.ifnmg.tads.trabalhofinal.DomainModel.Telefone</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+    </properties>
+  </persistence-unit>
+</persistence>
