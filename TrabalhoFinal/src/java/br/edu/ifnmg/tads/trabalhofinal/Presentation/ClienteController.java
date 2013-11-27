@@ -8,11 +8,13 @@ import br.edu.ifnmg.tads.trabalhofinal.DomainModel.Cliente;
 import br.edu.ifnmg.tads.trabalhofinal.DomainModel.ClienteRepositorio;
 import br.edu.ifnmg.tads.trabalhofinal.DomainModel.Pessoa;
 import java.io.Serializable;
+import java.util.Enumeration;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -57,10 +59,41 @@ public class ClienteController implements Serializable{
         return "ClienteEditar.xhtml";
     }
     
-    public void Login(){
-       if (dao.Login(cliente)){
-           exibirMensagem("sucesso");
-       }
+    public String Login(){
+       
+        if(dao.Login(cliente) == null){
+            exibirMensagem("Login ou Senha incorretos");
+            return "login.xhtml";
+        } else {
+            HttpSession sessao;
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            sessao = (HttpSession) ctx.getExternalContext().getSession(false);
+            sessao.setAttribute("usuarioAutenticado", cliente);
+            //AppendLog("Login");
+            return "index.xhtml";
+        }
+        
+        
+        
+    }
+    
+    public String logout(){
+        
+        HttpSession sessao;
+ 
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        sessao = (HttpSession) ctx.getExternalContext().getSession(false);
+        sessao.setAttribute("usuarioAutenticado", null);
+ 
+        //AppendLo("Logout");
+        
+        Enumeration<String> vals = sessao.getAttributeNames(); 
+        
+        while(vals.hasMoreElements()){
+            sessao.removeAttribute(vals.nextElement());
+        }
+ 
+        return "login.xhtml";
         
     }
     

@@ -8,12 +8,15 @@ import br.edu.ifnmg.tads.trabalhofinal.DomainModel.Ambiente;
 import br.edu.ifnmg.tads.trabalhofinal.DomainModel.AmbienteRepositorio;
 import java.util.HashMap;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author Rodrigo
  */
+
+@Stateless(mappedName = "AmbienteRepositorio")
 public class AmbienteDAO extends DAOGenerico<Ambiente> implements AmbienteRepositorio{
     
     public AmbienteDAO(){
@@ -22,7 +25,7 @@ public class AmbienteDAO extends DAOGenerico<Ambiente> implements AmbienteReposi
     
     public List<Ambiente> buscarAmbiente(Ambiente ambiente){
         
-        String consulta = "select a from Ambiente a";
+        String consulta = "select a from Ambiente a where a.ativo = 1";
         
         String filtro = "";
             
@@ -30,17 +33,25 @@ public class AmbienteDAO extends DAOGenerico<Ambiente> implements AmbienteReposi
             
             if (ambiente != null){
                 if(ambiente.getNome() != null && ambiente.getNome().length() > 0){
-                    filtro += " s.nome=:nome";
+                    filtro += "a.nome =:nome";
                     param.put("nome", ambiente.getNome());
                 }
                 
                 if(ambiente.getDescricao() != null && ambiente.getDescricao().length() > 0){
-                    filtro += " and s.descricao=:descricao";
+                    if(filtro.length() > 0){
+                        filtro += " and ";
+                    }
+                    
+                    filtro += "a.descricao=:descricao";
                     param.put("descricao", ambiente.getDescricao());
                 }
                 
                 if(ambiente.getCapacidadetotal() > 0){
-                    filtro += " and s.capacidadetotal=:capacidadetotal";
+                    if(filtro.length() > 0){
+                        filtro += " and ";
+                    }
+                    
+                    filtro += "a.capacidadetotal=:capacidadetotal";
                     param.put("capacidadetotal", ambiente.getCapacidadetotal());
                 }
                 
@@ -48,16 +59,16 @@ public class AmbienteDAO extends DAOGenerico<Ambiente> implements AmbienteReposi
             }
             
             if(filtro.length() > 0){
-                consulta = consulta + " where " + filtro;
+                consulta = consulta + " and " + filtro;
             }
             
             Query query = manager.createQuery(consulta);
             
             for(String par : param.keySet()){
-                query.setParameter(par, param.get(param));
+                query.setParameter(par, param.get(par));
             }
             
-            //System.out.println(query);
+            System.out.println(query);
             
             return query.getResultList();
         

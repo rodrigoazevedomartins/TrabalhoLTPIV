@@ -14,6 +14,6 @@ import javax.ejb.Local;
 @Local
 public interface ClienteRepositorio extends RepositorioGenerico<Cliente>{
     
-    public boolean Login(Cliente cliente);
+    public Cliente Login(Cliente cliente);
     
 }

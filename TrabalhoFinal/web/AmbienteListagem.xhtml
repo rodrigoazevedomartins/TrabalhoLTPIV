@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="content">
+       
+            <f:facet name="header">  
+                Filtros  
+            </f:facet>  
+            <h:form>
+                <p:panelGrid columns="3" style="background-color: #ffffff;">
+                    <h:outputLabel value="Nome.:" />
+                    <h:outputLabel value="Descrição.:" />
+                    <h:outputLabel value="Capacidade Total.:" />
+                                        
+                    <p:inputText value="${ambienteController.filtro.nome}" />  
+
+                    <p:inputText value="${ambienteController.filtro.descricao}" />  
+                                        
+                    <p:inputText value="${ambienteController.filtro.capacidadetotal}" />  
+                    
+                    <f:facet name="footer">  
+                        <p:commandButton ajax="false" value="Novo Ambiente" action="${ambienteController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${ambienteController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        
+                    </f:facet>
+                    
+                    
+                </p:panelGrid>
+            </h:form>
+        
+
+        
+        
+        <p:dataTable value="${ambienteController.listaAmbiente}" var="ambiente" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
+             
+            <p:column sortBy="noeme" headerText="Nome">
+                ${ambiente.nome}
+            </p:column>
+            
+            <p:column sortBy="descricao" headerText="Descrição">
+                ${ambiente.descricao}
+            </p:column>
+            
+             <p:column sortBy="descricao" headerText="Capacidade Total">
+                ${ambiente.capacidadetotal}
+            </p:column>
+                        
+            <p:column headerText="Ações">
+                
+                <h:form>
+                    <p:commandButton  value="Editar" ajax="false" action="${ambienteController.editar()}">
+                        <f:setPropertyActionListener target="${ambienteController.ambiente}" value="${ambiente}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Apagar" ajax="false" action="${ambienteController.apagar()}">
+                        <f:setPropertyActionListener target="${ambienteController.ambiente}" value="${ambiente}"/>
+                    </p:commandButton>                    
+                </h:form>
+            </p:column>
+            
+        </p:dataTable>
+    </ui:define>
+
+</ui:composition>

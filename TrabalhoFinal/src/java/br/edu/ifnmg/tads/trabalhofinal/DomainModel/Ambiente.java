@@ -36,16 +36,20 @@ public class Ambiente implements Serializable {
 
     @Column(name = "capacidadetotal", length = 255)
     private int capacidadetotal;
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "enderecoid")
     private Endereco endereco;
 
-    public Ambiente(String nome, String descricao, int capacidadetotal, Endereco endereco) {
+    public Ambiente(String nome, String descricao, int capacidadetotal, Endereco endereco, int ativo) {
         this.nome = nome;
         this.descricao = descricao;
         this.capacidadetotal = capacidadetotal;
         this.endereco = endereco;
+        this.ativo = ativo;
     }
     
     public Ambiente() {
@@ -53,6 +57,7 @@ public class Ambiente implements Serializable {
         this.descricao = "";
         this.capacidadetotal = 0;
         this.endereco = new Endereco();
+        this.ativo = 1;
     }
     
     public Long getAmbienteid() {
@@ -94,7 +99,15 @@ public class Ambiente implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-
+    
+    public void setAtivo(int ativo){
+        this.ativo = ativo;
+    }
+    
+    public int getAtivo(){
+        return this.ativo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

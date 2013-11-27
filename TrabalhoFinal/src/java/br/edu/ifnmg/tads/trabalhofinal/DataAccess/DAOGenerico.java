@@ -40,8 +40,7 @@ public abstract class DAOGenerico<T> implements RepositorioGenerico<T>{
     
     public boolean Apagar(T obj){
         try{
-            manager.remove(obj);
-            manager.flush();
+            manager.merge(obj);
             return true;
         } catch (Exception ex){
             return false;

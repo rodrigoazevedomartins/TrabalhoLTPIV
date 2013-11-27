@@ -21,7 +21,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
         super(Cliente.class);
     }
     
-    public boolean Login(Cliente cliente){
+    public Cliente Login(Cliente cliente){
                   
             String consulta = "select c from Cliente c";
             
@@ -50,9 +50,9 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
             System.out.println(query);
             
             if(query.getSingleResult()!= null){
-                return true;
+                return (Cliente) query.getSingleResult();
             } else {
-                return false;
+                return null;
             }
         
     }
