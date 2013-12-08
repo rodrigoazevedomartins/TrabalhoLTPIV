@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,7 @@ import javax.persistence.TemporalType;
  * @author Rodrigo
  */
 @Entity
+@Table(name = "atividade")
 public class Atividade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,8 +56,11 @@ public class Atividade implements Serializable {
     @Enumerated
     @JoinColumn(name = "tipoaatividadeid")
     private TipoAtividade tipoatividade;
-
-    public Atividade(String nome, String descricao, String local, Date inicio, Date termino, Evento evento, TipoAtividade tipoatividade) {
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
+    public Atividade(String nome, String descricao, String local, Date inicio, Date termino, Evento evento, int ativo, TipoAtividade tipoatividade) {
         this.nome = nome;
         this.descricao = descricao;
         this.local = local;
@@ -63,6 +68,7 @@ public class Atividade implements Serializable {
         this.termino = termino;
         this.evento = evento;
         this.tipoatividade = tipoatividade;
+        this.ativo = ativo;
     }
     
     public Atividade(){
@@ -72,7 +78,8 @@ public class Atividade implements Serializable {
         this.inicio = new Date(0);
         this.termino = new Date(0);
         this.evento = new Evento();
-        this.tipoatividade = TipoAtividade.Vazio;
+        this.ativo = 1;
+        this.tipoatividade = tipoatividade.Vazio;
     }
 
     public Long getAtividadeid() {
@@ -130,7 +137,14 @@ public class Atividade implements Serializable {
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
-
+    
+    public void setAtivo(int ativo){
+        this.ativo = ativo;
+    }
+    
+    public int getAtivo(){
+        return this.ativo;
+    }
     public TipoAtividade getTipoatividade() {
         return tipoatividade;
     }

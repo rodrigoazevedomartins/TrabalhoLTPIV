@@ -9,7 +9,7 @@ package br.edu.ifnmg.tads.trabalhofinal.DomainModel;
  * @author Rodrigo
  */
 public enum TipoAtividade {
-    Vazio("Vazio", 0),
+    Vazio("", 0),
     Palestra("Paletra", 1),
     Minicurso("Minicurso", 2),
     Abertura("Abertura", 3),
@@ -25,21 +25,15 @@ public enum TipoAtividade {
         this.nome = nome;
         this.tipoatividadeid = tipoatividadeid;
     }
-    
-    public String consultaTipoAtividade(int tipoatividade){
-        switch(tipoatividade){
-            case 0: return "Vazio";
-            case 1: return "Palestra";
-            case 2: return "Minicurso";
-            case 3: return "Abertura";
-            case 4: return "Intervalo";
-            case 5: return "Mesa Redonda";
-            case 6: return "Workshop";
-            case 7: return "Apresentação de Artigos";
-            default: return "";
-        }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    
+
+    public void setTipoatividadeid(int tipoatividadeid) {
+        this.tipoatividadeid = tipoatividadeid;
+    }
+           
     public String getNome(){
         return this.nome;
     }
@@ -47,5 +41,12 @@ public enum TipoAtividade {
     public int getTipoAtividadeId(){
         return this.tipoatividadeid;
     }
+   
+    @Override
+    public String toString() {
+        return name();
+    }
+    
+    
     
 }
