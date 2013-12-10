@@ -33,15 +33,20 @@ public class ParceiroEvento implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "eventoid")
     private Evento evento;
-
-    public ParceiroEvento(Parceiro parceiro, Evento evento) {
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
+    public ParceiroEvento(Parceiro parceiro, Evento evento, int ativo) {
         this.parceiro = parceiro;
         this.evento = evento;
+        this.ativo = ativo;
     }
 
     public ParceiroEvento(){
         this.parceiro = new Parceiro();
         this.evento = new Evento();
+        this.ativo = 1;
     }
     
     public Long getParceiroeventoid() {
@@ -68,6 +73,14 @@ public class ParceiroEvento implements Serializable {
         this.evento = evento;
     }
 
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+        
     @Override
     public int hashCode() {
         int hash = 5;

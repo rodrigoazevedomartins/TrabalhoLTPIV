@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        
+        <h:form>
+                        <p:panel>
+                                Dados Cadastrais
+                        </p:panel>
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputLabel value="Nome.:"/>
+                            <p:inputText value="#{parceiroController.parceiro.nome}" required="true" size="71"/>  
+                        
+                        </h:panelGrid>
+                
+                        <p:panel id="Rodape">
+                            <p:commandButton value="Cadastrar" onclick="msgSalvar.show();" />
+                            <p:commandButton value="Cancelar" onclick="msgCancelar.show();" />                
+                                       
+                        </p:panel>       
+                        <p:confirmDialog id="confirmaSalvar" message="Deseja realmente Salvar os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgSalvar">
+                            <p:commandButton ajax="false" value="SIM" action="${parceiroController.salvar()}" />
+                            <p:commandButton ajax="false" value="NÃO" onclick="msgSalvar.hide()" />                    
+                        </p:confirmDialog>
+            
+                        <p:confirmDialog id="cancelaSalvar" message="Deseja cancelar o cadastro?" header="Confirmação"
+                                 severity="alert" widgetVar="msgCancelar">
+                            <p:commandButton ajax="false" value="SIM" action="${parceiroController.voltaPagina()}" />
+                            <p:commandButton ajax="false" value="NÃO" onclick="msgCancelar.hide()"/>
+                        </p:confirmDialog>
+                
+            
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

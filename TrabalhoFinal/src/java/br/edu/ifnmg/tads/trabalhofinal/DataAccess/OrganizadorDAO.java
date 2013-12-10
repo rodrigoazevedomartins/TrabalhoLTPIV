@@ -7,12 +7,15 @@ package br.edu.ifnmg.tads.trabalhofinal.DataAccess;
 import br.edu.ifnmg.tads.trabalhofinal.DomainModel.Organizador;
 import br.edu.ifnmg.tads.trabalhofinal.DomainModel.OrganizadorRepositorio;
 import java.util.HashMap;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author Rodrigo
  */
+
+@Stateless(mappedName = "OrganizadorRepositorio")
 public class OrganizadorDAO extends DAOGenerico<Organizador> implements OrganizadorRepositorio{
     
     public OrganizadorDAO(){
@@ -21,7 +24,7 @@ public class OrganizadorDAO extends DAOGenerico<Organizador> implements Organiza
     
     public boolean Login(Organizador organizador){
         
-        String consulta = "select o from Organizador o";
+        String consulta = "select o from Organizador o where o.ativo = 1";
         
         String filtro = "";
             
@@ -35,13 +38,15 @@ public class OrganizadorDAO extends DAOGenerico<Organizador> implements Organiza
                 }
             }
             
+            if(filtro.length() > 0){
+                consulta = consulta + " and " + filtro;
+            }
+            
             Query query = manager.createQuery(consulta);
             
             for(String par : param.keySet()){
-                query.setParameter(par, param.get(param));
+                query.setParameter(par, param.get(par));
             }
-            
-            System.out.println(query);
             
             if(query.getResultList() != null){
                 return true;

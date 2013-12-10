@@ -37,14 +37,18 @@ public class Setor implements Serializable {
     @Column(name = "capacidade", length = 11)
     private int capacidade;
     
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "ambienteid")
     private Ambiente ambiente;
 
-    public Setor(String nome, String descricao, int capacidade, Ambiente ambiente) {
+    public Setor(String nome, String descricao, int capacidade, int ativo, Ambiente ambiente) {
         this.nome = nome;
         this.descricao = descricao;
         this.capacidade = capacidade;
+        this.ativo = ativo;
         this.ambiente = ambiente;
     }
     
@@ -52,6 +56,7 @@ public class Setor implements Serializable {
         this.nome = "";
         this.descricao = "";
         this.capacidade = 0;
+        this.ativo = 1;
         this.ambiente = new Ambiente();
     }
 
@@ -87,6 +92,14 @@ public class Setor implements Serializable {
         this.capacidade = capacidade;
     }
 
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+    
     public Ambiente getAmbiente() {
         return ambiente;
     }
@@ -99,7 +112,6 @@ public class Setor implements Serializable {
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 97 * hash + (this.ambiente != null ? this.ambiente.hashCode() : 0);
         return hash;
     }
 
@@ -113,9 +125,6 @@ public class Setor implements Serializable {
         }
         final Setor other = (Setor) obj;
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
-            return false;
-        }
-        if (this.ambiente != other.ambiente && (this.ambiente == null || !this.ambiente.equals(other.ambiente))) {
             return false;
         }
         return true;

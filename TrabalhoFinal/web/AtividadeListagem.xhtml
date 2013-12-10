@@ -30,9 +30,9 @@
 
                     
                     <f:facet name="footer">  
-                        <p:commandButton ajax="false" value="Nova Atividade" action="${atividadeController.novo()}" style="float: right"/>
-                        <p:commandButton ajax="false" value="Limpar Filtros" action="${atividadeController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
-                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${atividadeController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        <p:commandButton ajax="false" value="Nova Atividade" icon="ui-icon-plusthick" action="${atividadeController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" icon="ui-icon-minusthick" action="${atividadeController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-search" action="${atividadeController.filtrar()}" style="float: right; margin-right: 10px"/>  
                         
                     </f:facet>  
                     
@@ -46,7 +46,7 @@
             <f:facet name="header">  
                 LISTA DE ATIVIDADES CADASTRADOS 
             </f:facet> 
-            <p:column sortBy="noeme" headerText="Nome">
+            <p:column sortBy="nome" headerText="Nome">
                 ${atividade.nome}
             </p:column>
             
@@ -61,19 +61,14 @@
             <p:column headerText="Ações">
                 
                 <h:form>
-                    <p:commandButton  value="Editar" ajax="false" action="${atividadeController.editar()}">
+                    <p:commandButton  value="Editar" ajax="false" action="${atividadeController.editar()}" icon="ui-icon-pencil">
                         <f:setPropertyActionListener target="${atividadeController.atividade}" value="${atividade}"/>
                     </p:commandButton>
                     
-                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();">
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();" icon="ui-icon-closethick">
                         <f:setPropertyActionListener target="${atividadeController.atividade}" value="${atividade}"/>
                     </p:commandButton>
-                    
-                    <!--<p:commandButton  value="Setores" ajax="false" action="${setorController.voltaPagina()}">
-                        <f:setPropertyActionListener target="${setorController.setor.ambiente}" value="${ambiente}"/>
-                    </p:commandButton>
-                    -->
-                    
+                                        
                     <p:confirmDialog id="confirmaExcluir" message="Deseja realmente Excluir os Dados?" header="Confirmação"
                                  severity="alert" widgetVar="msgExcluir">
                         <p:commandButton ajax="false" value="SIM" action="${atividadeController.apagar()}" />

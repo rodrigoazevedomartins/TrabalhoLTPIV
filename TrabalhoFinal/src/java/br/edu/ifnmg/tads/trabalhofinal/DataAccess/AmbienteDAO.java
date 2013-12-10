@@ -56,6 +56,7 @@ public class AmbienteDAO extends DAOGenerico<Ambiente> implements AmbienteReposi
                 }
                 
                 
+                
             }
             
             if(filtro.length() > 0){
@@ -67,9 +68,7 @@ public class AmbienteDAO extends DAOGenerico<Ambiente> implements AmbienteReposi
             for(String par : param.keySet()){
                 query.setParameter(par, param.get(par));
             }
-            
-            System.out.println(query);
-            
+                
             return query.getResultList();
         
     }

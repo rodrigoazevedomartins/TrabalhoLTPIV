@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -53,21 +54,31 @@ public class Ingresso implements Serializable {
     @Column(name = "fimvenda", length = 11) 
     private Date fimvenda;
     
+    @Column(name = "valor")
+    private double valor;
+    
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "setorid")
     private Setor setor;
     
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventoid")
     private Evento evento;
-
-    public Ingresso(String nome, String descricao, int quantidade, int qtdemaximavenda, Date iniciovenda, Date fimvenda, Setor setor, Evento evento) {
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
+    public Ingresso(String nome, String descricao, int quantidade, int qtdemaximavenda, Date iniciovenda, Date fimvenda, int ativo, double valor, Setor setor, Evento evento) {
         this.nome = nome;
         this.descricao = descricao;
         this.quantidade = quantidade;
         this.qtdemaximavenda = qtdemaximavenda;
         this.iniciovenda = iniciovenda;
         this.fimvenda = fimvenda;
+        this.valor = valor;
         this.setor = setor;
         this.evento = evento;
+        this.ativo = ativo;
     }
     
     public Ingresso() {
@@ -75,10 +86,12 @@ public class Ingresso implements Serializable {
         this.descricao = "";
         this.quantidade = 0;
         this.qtdemaximavenda = 0;
-        this.iniciovenda = new Date(0);
-        this.fimvenda = new Date(0);
+        this.iniciovenda = new Date();
+        this.fimvenda = new Date();
+        this.valor = 0;
         this.setor = new Setor();
-        this.evento = new Evento();   
+        this.evento = new Evento();
+        this.ativo = 1;
     }
 
     public Long getIngressoid() {
@@ -145,6 +158,24 @@ public class Ingresso implements Serializable {
         this.fimvenda = fimvenda;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    
+    
+    
+    public int getAtivo(){
+        return ativo;
+    }
+    
+    public void setAtivo(int ativo){
+        this.ativo = ativo;
+    }
+    
     public Setor getSetor() {
         return setor;
     }

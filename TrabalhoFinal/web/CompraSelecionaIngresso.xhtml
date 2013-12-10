@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        
+        <p:dataTable value="${compraController.listaIngresso}" var="ingresso" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
+            <f:facet name="header">  
+                LISTA DE INGRESSOS CADASTRADOS 
+            </f:facet> 
+            <p:column sortBy="nome" headerText="Nome">
+                ${ingresso.nome}
+            </p:column>
+            
+            <p:column sortBy="descricao" headerText="Descrição">
+                ${ingresso.descricao}
+            </p:column>
+            
+             <p:column sortBy="iniciovenda" headerText="Início da Venda">
+                 <h:outputLabel value="${ingresso.iniciovenda}" converter="AtividadeConverter" />
+             </p:column>
+            
+             <p:column sortBy="fimvenda" headerText="Término da Venda">
+                  <h:outputLabel value="${ingresso.fimvenda}" converter="AtividadeConverter" />
+             </p:column>
+            
+            <p:column sortBy="setor" headerText="Setor">
+                ${ingresso.setor.nome}
+            </p:column>
+            
+            <p:column headerText="Ações">
+                
+                <h:form>
+                    <p:commandButton  value="" ajax="false" action="${compraController.informaQuantidade()}">
+                        <f:setPropertyActionListener target="${compraController.ingresso}" value="${ingresso}"/>
+                    </p:commandButton>
+
+                </h:form>
+            </p:column>
+            
+        </p:dataTable>
+        
+        
+    </ui:define>
+
+</ui:composition>

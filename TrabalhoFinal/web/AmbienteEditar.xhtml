@@ -62,19 +62,17 @@
                             <p:inputText value="#{ambienteController.ambiente.endereco.estado}" required="true" size="34"/>
                          </h:panelGrid>
                          
-                         <h:panelGrid columns="2" cellpadding="10">
-                            <h:outputLabel value="País.:"></h:outputLabel>
-                            <p:inputText value="#{ambienteController.ambiente.endereco.pais}" required="true" size="30"/>
+                        <h:panelGrid columns="2" cellpadding="10">
+                             <h:outputLabel for="pais" value="País.:"></h:outputLabel>
+                            <p:inputText id="pais" value="#{ambienteController.ambiente.endereco.pais}" required="true" size="30"/>
                             
                         </h:panelGrid>
                     </p:tab>
                 </p:tabView>
-            <p:panel id="Rodape">
+                <p:panel id="Rodape">
                     <p:commandButton value="Cadastrar" onclick="msgSalvar.show();" />
                     <p:commandButton value="Cancelar" onclick="msgCancelar.show();" />
-                    <p:commandButton value="Excluir Cadastro" onclick="msgExcluir.show();" rendered="#{ambienteController.ambiente.ambienteid>0}"/>
-                    
-                    
+                                       
                     
                 </p:panel>       
                 <p:confirmDialog id="confirmaSalvar" message="Deseja realmente Salvar os Dados?" header="Confirmação"
@@ -89,6 +87,7 @@
                     <p:commandButton ajax="false" value="NÃO" onclick="msgCancelar.hide()"/>
                 </p:confirmDialog>
                 
+                <p:growl id="alerta" showDetail="true" sticky="true" life="3"/>
         </h:form>
     </ui:define>
 

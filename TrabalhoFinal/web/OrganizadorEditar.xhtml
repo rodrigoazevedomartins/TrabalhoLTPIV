@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="content">
+        
+        <h:form>
+               
+                <p:tabView>
+                     <p:tab title="Dados Pessoais" id="DadosPessoais">
+                
+                        <h:panelGrid columns="2" cellpadding="10">
+                
+                            <h:outputLabel value="Nome.:"/>
+                            <p:inputText value="#{organizadorController.organizador.nome}" required="true" size="77"/>  
+                        
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="4" cellpadding="10">
+                         
+                            <h:outputLabel value="Sexo.:"/>
+                            <p:selectOneRadio id="options" value="#{organizadorController.organizador.sexo}">  
+                                <f:selectItem itemLabel="Masculino" itemValue="1" />  
+                                <f:selectItem itemLabel="Feminino" itemValue="2" />    
+                            </p:selectOneRadio> 
+                            
+                            <h:outputLabel value="Data de Nascimento.:" style="margin-left: 20px"/>
+                            <p:inputMask value="#{organizadorController.organizador.datanasc}" required="true" mask="99/99/9999" converter="ClienteConverter"/>
+                            
+                        </h:panelGrid>    
+                         <h:panelGrid columns="4" cellpadding="10">
+                             <h:outputLabel value="CNPJ.:"/>
+                             <p:inputText value="#{organizadorController.organizador.cnpj}"/>
+                             <h:outputLabel value="Razão Social.:"/>
+                             <p:inputText value="#{organizadorController.organizador.razaosocial}"/>
+                         </h:panelGrid>
+                         
+                         <h:panelGrid columns="2" cellpadding="10">
+                             <h:outputLabel value="Descrição.:"/>
+                             <p:inputTextarea value="#{organizadorController.organizador.descricao}" cols="77" rows="5"/>
+                         </h:panelGrid>
+                         
+                         <h:panelGrid columns="4" cellpadding="10">
+                            
+                            <h:outputLabel value="Login.:"/>
+                            <p:inputText value="#{organizadorController.organizador.login}" required="true" size="29"/> 
+                            
+                            <h:outputLabel value="Senha.:"/>
+                            <p:password id="feedback" value="#{organizadorController.organizador.senha}" feedback="true" 
+                                        promptLabel="Insira uma senha" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte" size="28"/>  
+                         </h:panelGrid>
+                
+                     </p:tab>
+                    
+                     <p:tab title="Endereco" id="Endereco">
+                        <h:panelGrid columns="4" cellpadding="10">
+                            <h:outputLabel value="Rua.:"/>
+                            <p:inputText value="#{organizadorController.organizador.endereco.rua}" required="true" size="70"/>  
+                        </h:panelGrid>
+                        <h:panelGrid columns="4" cellpadding="10"> 
+                            <h:outputLabel value="Número.:"></h:outputLabel>
+                            <p:inputText value="#{organizadorController.organizador.endereco.numero}" required="true" size="7"/>
+                            
+                            <h:outputLabel value="Complemento.:"></h:outputLabel>
+                            <p:inputText value="#{organizadorController.organizador.endereco.complemento}" required="false" size="31"/>
+                        </h:panelGrid>
+                         
+                        <h:panelGrid columns="4" cellpadding="10"> 
+                            <h:outputLabel value="Bairro.:"></h:outputLabel>
+                            <p:inputText value="#{organizadorController.organizador.endereco.bairro}" required="true" size="16"/>
+                            
+                            <h:outputLabel value="Cidade.:"></h:outputLabel>
+                            <p:inputText value="#{organizadorController.organizador.endereco.cidade}" required="true" size="31"/>
+                        </h:panelGrid>
+                         
+                         <h:panelGrid columns="4" cellpadding="10">
+                            <h:outputLabel value="CEP.:"></h:outputLabel>
+                            <p:inputMask value="#{organizadorController.organizador.endereco.cep}" required="true" mask="99999-999" size="14"/>
+                            
+                            <h:outputLabel value="Estado.:"></h:outputLabel>
+                            <p:inputText value="#{organizadorController.organizador.endereco.estado}" required="true" size="34"/>
+                         </h:panelGrid>
+                         
+                         <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputLabel value="País.:"></h:outputLabel>
+                            <p:inputText value="#{organizadorController.organizador.endereco.pais}" required="true" size="30"/>
+                            
+                        </h:panelGrid>
+                    </p:tab>
+                    
+                    <p:tab title="Telefone" id="Telefone">
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel value="DDD.:"/>
+                            <p:inputText value="#{organizadorController.organizador.telefone.ddd}" required="true" size="2"/>
+
+                            <h:outputLabel value="Número.:" style="margin-left: 20px;"/>
+                            <p:inputText value="#{organizadorController.organizador.telefone.numero}" required="true" size="9"/>
+                        </h:panelGrid>
+                    </p:tab>
+                    
+                    <p:tab title="Email" id="Email">
+                        <h:panelGrid columns="4" cellpadding="10">
+                            <h:outputLabel value="Email.:"/>
+                            <p:inputText value="#{organizadorController.organizador.email.email}" required="true" size="45"/>
+                        </h:panelGrid>
+                    </p:tab>
+                    
+                
+                </p:tabView>
+                
+                <p:panel id="Rodape">
+                    <p:commandButton value="Cadastrar" onclick="msgSalvar.show();" />
+                    <p:commandButton value="Cancelar" onclick="msgCancelar.show();" />
+                    
+                    
+                    
+                </p:panel>       
+                <p:confirmDialog id="confirmaSalvar" message="Deseja realmente Salvar os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgSalvar">
+                    <p:commandButton ajax="false" value="SIM" action="${organizadorController.salvar()}" />
+                    <p:commandButton ajax="false" value="NÃO" onclick="msgSalvar.hide()" />                    
+                </p:confirmDialog>
+                <p:confirmDialog id="cancelaSalvar" message="Deseja cancelar o cadastro?" header="Confirmação"
+                                 severity="alert" widgetVar="msgCancelar">
+                    <p:commandButton ajax="false" value="SIM" action="${organizadorController.voltaPaginaInicial()}" />
+                    <p:commandButton ajax="false" value="NÃO" onclick="msgCancelar.hide()"/>
+                </p:confirmDialog>
+            </h:form>
+
+    </ui:define>
+
+</ui:composition>

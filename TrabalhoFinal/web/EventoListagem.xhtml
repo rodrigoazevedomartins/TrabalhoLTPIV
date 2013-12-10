@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+       
+         <h:form>
+                <p:panelGrid columns="4" style="background-color: #ffffff;">
+                    <f:facet name="header">  
+                        FILTROS 
+                    </f:facet>  
+                    <h:outputLabel value="Nome.:" />
+                    <h:outputLabel value="Descrição.:" />
+                    <h:outputLabel value="Ambiente.:" />
+                    <h:outputLabel value="Categoria.:" />
+                                        
+                    <p:inputText value="${eventoController.filtro.nome}" />  
+
+                    <p:inputText value="${eventoController.filtro.descricao}" />  
+                    
+                    <p:selectOneMenu value="${eventoController.filtro.ambiente}" converter="${ambienteConverter}" style="width: 150px">  
+                        <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled=""/>
+                        <f:selectItems value="${eventoController.listaAmbiente}"/>
+                    </p:selectOneMenu>
+                    
+                    <p:selectOneMenu value="${eventoController.filtro.categoria}" required="true" converter="${categoriaConverter}" style="width: 150px">
+                        <f:selectItems value="${eventoController.listaCategoria}" var="categoria" itemLabel="${categoria.nome}"/>
+                    </p:selectOneMenu>
+                    
+                    
+                    <f:facet name="footer">  
+                        <p:commandButton ajax="false" value="Novo Evento" action="${eventoController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" action="${eventoController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${eventoController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        
+                    </f:facet>  
+                    
+                </p:panelGrid>
+        </h:form>
+        
+        <p:dataTable value="${eventoController.listaEvento}" var="evento" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
+            <f:facet name="header">  
+                LISTA DE EVENTOS CADASTRADOS 
+            </f:facet> 
+            <p:column sortBy="nome" headerText="Nome">
+                ${evento.nome}
+            </p:column>
+            
+            <p:column sortBy="descricao" headerText="Descrição">
+                ${evento.descricao}
+            </p:column>
+            
+             <p:column sortBy="ambiente" headerText="Ambiente">
+                 ${evento.ambiente.nome}
+             </p:column>
+            
+             <p:column sortBy="categoria" headerText="Categoria">
+                 ${evento.categoria.nome}
+             </p:column>
+            
+             <p:column sortBy="inicio" headerText="Data/Hora Início">
+                 <h:outputLabel value="${evento.inicio}" converter="AtividadeConverter" />
+             </p:column>
+            
+            <p:column sortBy="termino" headerText="Data/Hora Término">
+                <h:outputLabel value="${evento.termino}" converter="AtividadeConverter" />
+            </p:column>
+            
+                        
+            <p:column headerText="Ações">
+                
+                <h:form>
+                    <p:commandButton  value="Editar" ajax="false" action="${eventoController.editar()}">
+                        <f:setPropertyActionListener target="${eventoController.evento}" value="${evento}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();">
+                        <f:setPropertyActionListener target="${eventoController.evento}" value="${evento}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Ingressos" ajax="false" action="${ingressoController.filtrar()}">
+                        <f:setPropertyActionListener target="${ingressoController.ingresso.evento}" value="${evento}"/>
+                        <f:setPropertyActionListener target="${ingressoController.filtro.evento}" value="${evento}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Atividades" ajax="false" action="${atividadeController.filtrar()}" icon="ui-icon-folder-open">
+                        <f:setPropertyActionListener target="${atividadeController.atividade.evento}" value="${evento}"/>
+                        <f:setPropertyActionListener target="${atividadeController.filtro.evento}" value="${evento}"/>
+                    </p:commandButton>
+                    
+                    
+                    <p:confirmDialog id="confirmaExcluir" message="Deseja realmente Excluir os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgExcluir">
+                        <p:commandButton ajax="false" value="SIM" action="${eventoController.apagar()}" />
+                            
+                        <p:commandButton ajax="false" value="NÃO" onclick="msgExcluir.hide()" />                    
+                    </p:confirmDialog>
+
+                    
+                </h:form>
+            </p:column>
+            
+        </p:dataTable>
+        
+    </ui:define>
+
+</ui:composition>

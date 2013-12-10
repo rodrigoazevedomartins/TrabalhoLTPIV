@@ -9,7 +9,7 @@ package br.edu.ifnmg.tads.trabalhofinal.DomainModel;
  * @author Rodrigo
  */
 public enum Categoria {
-    Vazio("Vazio", 0),
+    Vazio("Selecione", 0),
     CongressoSeminario("Congresso, Seminário", 1),
     ShowMusicaFesta("Show, Música, Festa", 2),
     Esportivo("Esportivo", 3),
@@ -25,20 +25,16 @@ public enum Categoria {
         this.nome = nome;
         this.categoriaid = categoriaid;
     }
-    
-    public String consultaCategoria(int categoriaid){
-        switch(categoriaid){
-            case 0: return "";
-            case 1: return "Congresso, Seminário";
-            case 2: return "Show, Música, Festa";
-            case 3: return "Esportivo";
-            case 4: return "Curso, Workshop";
-            case 5: return "Encontro, Networking";
-            case 6: return "Filme, Cinema, Teatro";
-            case 7: return "Outro";
-            default: return "";
-        }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
+
+    public void setCategoriaid(int categoriaid) {
+        this.categoriaid = categoriaid;
+    }
+    
+    
     
     public int getCategoriaId(){
         return this.categoriaid;
@@ -47,4 +43,13 @@ public enum Categoria {
     public String getNome(){
         return this.nome;
     }
+    
+    
+    
+    @Override
+    public String toString() {
+        return name();
+    }
+    
+    
 }

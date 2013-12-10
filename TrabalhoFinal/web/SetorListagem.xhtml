@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form>
+                <p:panelGrid columns="3" style="background-color: #ffffff;">
+                    <f:facet name="header">  
+                        FILTROS 
+                    </f:facet>  
+                    <h:outputLabel value="Nome.:" />
+                    <h:outputLabel value="Descrição.:" />
+                    <h:outputLabel value="Capacidade Total.:" />
+                                        
+                    <p:inputText value="${setorController.filtro.nome}" />  
+
+                    <p:inputText value="${setorController.filtro.descricao}" />  
+                                        
+                    <p:inputText value="${setorController.filtro.capacidade}" />  
+                    
+                    <f:facet name="footer">  
+                        <p:commandButton ajax="false" value="Novo Setor" action="${setorController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" action="${setorController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${setorController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        
+                    </f:facet>
+                    
+                    
+                </p:panelGrid>
+            </h:form>      
+        
+        <p:dataTable value="${setorController.listaSetor}" var="setor" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
+            <f:facet name="header">  
+                LISTA DE SETORES CADASTRADOS 
+            </f:facet> 
+            <p:column sortBy="nome" headerText="Nome">
+                ${setor.nome}
+            </p:column>
+            
+            <p:column sortBy="descricao" headerText="Descrição">
+                ${setor.descricao}
+            </p:column>
+            
+             <p:column sortBy="capacidade" headerText="Capacidade">
+                ${setor.capacidade}
+            </p:column>
+                        
+            <p:column headerText="Ações">
+                
+                <h:form>
+                    <p:commandButton  value="Editar" ajax="false" action="${setorController.editar()}">
+                        <f:setPropertyActionListener target="${setorController.setor}" value="${setor}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Apagar" ajax="false" action="${setorController.apagar()}">
+                        <f:setPropertyActionListener target="${setorController.setor}" value="${setor}"/>
+                    </p:commandButton>                    
+                
+                
+                    <p:confirmDialog id="confirmaExcluir" message="Deseja realmente Excluir os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgExcluir">
+                        <p:commandButton ajax="false" value="SIM" action="${setorController.apagar()}" />
+                            
+                        <p:commandButton ajax="false" value="NÃO" onclick="msgExcluir.hide()" />                    
+                    </p:confirmDialog>
+                </h:form>
+            </p:column>
+            
+        </p:dataTable>
+    </ui:define>
+
+</ui:composition>

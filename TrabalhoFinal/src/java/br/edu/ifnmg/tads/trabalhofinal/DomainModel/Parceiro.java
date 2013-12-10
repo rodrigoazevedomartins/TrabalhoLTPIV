@@ -24,13 +24,18 @@ public class Parceiro implements Serializable {
     
     @Column(name = "nome", length = 255)
     private String nome;
-
-    public Parceiro(String nome) {
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
+    public Parceiro(String nome, int ativo) {
         this.nome = nome;
+        this.ativo = ativo;
     }
 
     public Parceiro(){
         this.nome = "";
+        this.ativo = 1;
     }
     
     public Long getParceiroid() {
@@ -49,6 +54,14 @@ public class Parceiro implements Serializable {
         this.nome = nome;
     }
 
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

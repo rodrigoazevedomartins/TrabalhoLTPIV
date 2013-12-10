@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form>
+        
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:outputLabel value="Nome.:"/>
+            <h:outputLabel value="#{compraController.ingresso.nome}"/>
+        </h:panelGrid>
+        
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:outputLabel value="Setor.:"/>
+            <h:outputLabel value="#{compraController.ingresso.setor}"/>
+        </h:panelGrid>
+        
+        <h:panelGrid columns="2" cellpadding="10">
+            <h:outputLabel value="Quantidade.:"/>
+            <h:inputText value="#{compraController.qtdeComprada}" required="true" size="20"/>
+        </h:panelGrid>
+        
+        <p:commandButton ajax="false" value="Adicionar a Lista" action="${compraController.adicionaIngressoLista()}" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>

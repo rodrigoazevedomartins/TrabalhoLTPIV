@@ -6,6 +6,7 @@ package br.edu.ifnmg.tads.trabalhofinal.DomainModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -58,14 +59,41 @@ public class Evento implements Serializable {
     private Ambiente ambiente;
     
     @Enumerated
-    @JoinTable(name = "categoriaevento",
-            joinColumns = @JoinColumn(name = "categoriaid"), inverseJoinColumns = @JoinColumn(name = "eventoid"))
-    private List<Categoria> categorias;
+    @JoinColumn(name = "categoriaid")
+    private Categoria categoria;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "atividadeid")
+    @JoinColumn(name = "eventoid")
     private List<Atividade> atividades;
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
 
+    public Evento(String nome, String descricao, Date inicio, Date termino, Organizador organizador, Ambiente ambiente, Categoria categoria, List<Atividade> atividades, int ativo) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.inicio = inicio;
+        this.termino = termino;
+        this.organizador = organizador;
+        this.ambiente = ambiente;
+        this.categoria = categoria;
+        this.atividades = atividades;
+        this.ativo = ativo;
+    }
+    
+    public Evento() {
+        this.nome = "";
+        this.descricao = "";
+        this.inicio = new Date();
+        this.termino = new Date();
+        this.organizador = new Organizador();
+        this.ambiente = new Ambiente();
+        this.categoria = categoria.Vazio;
+        this.atividades = new LinkedList<Atividade>();
+        this.ativo = 1;
+    }
+    
+    
     public Long getEventoid() {
         return eventoid;
     }
@@ -121,15 +149,15 @@ public class Evento implements Serializable {
     public void setAmbiente(Ambiente ambiente) {
         this.ambiente = ambiente;
     }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
+    
+    public Categoria getCategoria(){
+        return categoria;
     }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
+    
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
     }
-
+    
     public List<Atividade> getAtividades() {
         return atividades;
     }
@@ -149,19 +177,15 @@ public class Evento implements Serializable {
             atividades.remove(atividade);
         }
     }
-    
-    public void addCategoria(Categoria categoria){
-        if (!categorias.contains(categoria)){
-            categorias.add(categoria);
-        }
-    }
-    
-    public void removeCategoria(Categoria categoria){
-        if (categorias.contains(categoria)){
-            categorias.remove(categoria);
-        }
+
+    public int getAtivo() {
+        return ativo;
     }
 
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

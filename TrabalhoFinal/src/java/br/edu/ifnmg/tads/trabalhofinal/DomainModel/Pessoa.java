@@ -83,14 +83,6 @@ public class Pessoa implements Serializable {
         this.endereco = new Endereco();
     }
     
-    public Long getPessoaId() {
-        return pessoaid;
-    }
-
-    public void setPessoaId(Long pessoaid) {
-        this.pessoaid = pessoaid;
-    }
-
     public Long getPessoaid() {
         return pessoaid;
     }

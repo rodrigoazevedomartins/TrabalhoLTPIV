@@ -4,10 +4,16 @@
  */
 package br.edu.ifnmg.tads.trabalhofinal.DomainModel;
 
+import java.util.List;
+import javax.ejb.Local;
+
 /**
  *
  * @author Rodrigo
  */
+@Local
 public interface ParceiroRepositorio extends RepositorioGenerico<Parceiro>{
+    
+    public List<Parceiro> buscarParceiro(Parceiro parceiro);
     
 }

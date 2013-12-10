@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        
+        <h:form>
+                <p:panelGrid columns="2" style="background-color: #ffffff;">
+                    <f:facet name="header">  
+                        FILTROS 
+                    </f:facet>  
+                    <h:outputLabel value="Nome.:" />
+                                        
+                    <p:inputText value="${parceiroController.filtro.nome}" size="40"/>  
+                    
+                    <f:facet name="footer">  
+                        <p:commandButton ajax="false" value="Novo Parceiro" icon="ui-icon-plusthick" action="${parceiroController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros"  icon="ui-icon-minusthick" action="${parceiroController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-search" action="${parceiroController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        
+                    </f:facet>
+                    
+                    
+                </p:panelGrid>
+            </h:form>
+            
+        <p:dataTable value="${parceiroController.listaParceiro}" var="parceiro" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
+            <f:facet name="header">  
+                LISTA DE PARCEIRO CADASTRADOS 
+            </f:facet> 
+            <p:column sortBy="nome" headerText="Nome">
+                ${parceiro.nome}
+            </p:column>
+                        
+            <p:column headerText="Ações">
+                
+                <h:form>
+                    <p:commandButton  value="Editar" ajax="false" action="${parceiroController.editar()}" icon="ui-icon-pencil">
+                        <f:setPropertyActionListener target="${parceiroController.parceiro}" value="${parceiro}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();" icon="ui-icon-closethick">
+                        <f:setPropertyActionListener target="${parceiroController.parceiro}" value="${parceiro}"/>
+                    </p:commandButton>
+                                     
+                    <p:confirmDialog id="confirmaExcluir" message="Deseja realmente Excluir os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgExcluir">
+                        <p:commandButton ajax="false" value="SIM" action="${parceiroController.apagar()}" />
+                            
+                        <p:commandButton ajax="false" value="NÃO" onclick="msgExcluir.hide()" />                    
+                    </p:confirmDialog>
+
+                    
+                </h:form>
+            </p:column>
+            
+        </p:dataTable>
+        
+        
+    </ui:define>
+
+</ui:composition>

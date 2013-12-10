@@ -54,20 +54,20 @@ public class Compra implements Serializable {
     joinColumns= @JoinColumn(name="compraid"), 
     inverseJoinColumns=@JoinColumn(name="ingressoid")
     )
-    private List<Ingresso> ingressos;
+    private List<CompraIngresso> compraingressos;
 
-    public Compra(Date datacompra, Cliente cliente, FormaPagamento formapagamento, List<Ingresso> ingressos) {
+    public Compra(Date datacompra, Cliente cliente, FormaPagamento formapagamento, List<CompraIngresso> compraingressos) {
         this.datacompra = datacompra;
         this.cliente = cliente;
         this.formapagamento = formapagamento;
-        this.ingressos = ingressos;
+        this.compraingressos = compraingressos;
     }
     
     public Compra() {
         this.datacompra = new Date(0);
         this.cliente = new Cliente();
         this.formapagamento = formapagamento.Vazio;
-        this.ingressos = new LinkedList<Ingresso>();
+        this.compraingressos = new LinkedList<CompraIngresso>();
     }
 
     public Long getCompraid() {
@@ -102,23 +102,23 @@ public class Compra implements Serializable {
         this.formapagamento = formapagamento;
     }
 
-    public List<Ingresso> getIngressos() {
-        return ingressos;
+    public List<CompraIngresso> getIngressos() {
+        return compraingressos;
     }
 
-    public void setIngressos(List<Ingresso> ingressos) {
-        this.ingressos = ingressos;
+    public void setCompraIngressos(List<CompraIngresso> compraingressos) {
+        this.compraingressos = compraingressos;
     }
     
-    public void addIngresso(Ingresso ingresso){
-        if (!ingressos.contains(ingresso)){
-            ingressos.add(ingresso);
+    public void addIngresso(CompraIngresso compraingresso){
+        if (!compraingressos.contains(compraingresso)){
+            compraingressos.add(compraingresso);
         }
     }
     
-    public void removeIngresso(Ingresso ingresso){
-        if (ingressos.contains(ingresso)){
-            ingressos.add(ingresso);
+    public void removeIngresso(CompraIngresso compraingresso){
+        if (compraingressos.contains(compraingresso)){
+            compraingressos.remove(compraingresso);
         }
     }
 

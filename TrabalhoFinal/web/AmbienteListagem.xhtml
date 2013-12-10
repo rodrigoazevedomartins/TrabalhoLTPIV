@@ -8,11 +8,12 @@
 
     <ui:define name="content">
        
-            <f:facet name="header">  
-                Filtros  
-            </f:facet>  
+            
             <h:form>
                 <p:panelGrid columns="3" style="background-color: #ffffff;">
+                    <f:facet name="header">  
+                        FILTROS 
+                    </f:facet>  
                     <h:outputLabel value="Nome.:" />
                     <h:outputLabel value="Descrição.:" />
                     <h:outputLabel value="Capacidade Total.:" />
@@ -24,8 +25,9 @@
                     <p:inputText value="${ambienteController.filtro.capacidadetotal}" />  
                     
                     <f:facet name="footer">  
-                        <p:commandButton ajax="false" value="Novo Ambiente" action="${ambienteController.novo()}" style="float: right"/>
-                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${ambienteController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        <p:commandButton ajax="false" value="Novo Ambiente" icon="ui-icon-plusthick" action="${ambienteController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" icon="ui-icon-minusthick" action="${ambienteController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-search" action="${ambienteController.filtrar()}" style="float: right; margin-right: 10px"/>  
                         
                     </f:facet>
                     
@@ -37,8 +39,10 @@
         
         
         <p:dataTable value="${ambienteController.listaAmbiente}" var="ambiente" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
-             
-            <p:column sortBy="noeme" headerText="Nome">
+            <f:facet name="header">  
+                LISTA DE AMBIENTES CADASTRADOS 
+            </f:facet> 
+            <p:column sortBy="nome" headerText="Nome">
                 ${ambiente.nome}
             </p:column>
             
@@ -46,20 +50,35 @@
                 ${ambiente.descricao}
             </p:column>
             
-             <p:column sortBy="descricao" headerText="Capacidade Total">
+             <p:column sortBy="capacidadetotal" headerText="Capacidade Total">
                 ${ambiente.capacidadetotal}
             </p:column>
                         
             <p:column headerText="Ações">
                 
                 <h:form>
-                    <p:commandButton  value="Editar" ajax="false" action="${ambienteController.editar()}">
+                    <p:commandButton  value="Editar" ajax="false" action="${ambienteController.editar()}" icon="ui-icon-pencil">
                         <f:setPropertyActionListener target="${ambienteController.ambiente}" value="${ambiente}"/>
                     </p:commandButton>
                     
-                    <p:commandButton  value="Apagar" ajax="false" action="${ambienteController.apagar()}">
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();" icon="ui-icon-closethick">
                         <f:setPropertyActionListener target="${ambienteController.ambiente}" value="${ambiente}"/>
-                    </p:commandButton>                    
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Setores" ajax="false" action="${setorController.filtrar()}" icon="ui-icon-folder-open">
+                        <f:setPropertyActionListener target="${setorController.filtro.ambiente}" value="${ambiente}"/>
+                        <f:setPropertyActionListener target="${setorController.setor.ambiente}" value="${ambiente}"/>
+                    </p:commandButton>
+                    
+                    
+                    <p:confirmDialog id="confirmaExcluir" message="Deseja realmente Excluir os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgExcluir">
+                        <p:commandButton ajax="false" value="SIM" action="${ambienteController.apagar()}" />
+                            
+                        <p:commandButton ajax="false" value="NÃO" onclick="msgExcluir.hide()" />                    
+                    </p:confirmDialog>
+
+                    
                 </h:form>
             </p:column>
             

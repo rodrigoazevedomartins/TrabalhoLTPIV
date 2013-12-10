@@ -10,44 +10,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-        <title>Facelets Template</title>
+        
+        <title>Sistema de Gerenciamento de Eventos</title>
     </h:head>
 
     <h:body>
 
         <div id="top">
+            
+            <img src="./resources/css/images/logoeslogan.fw.png" style="margin-top: -20px;"/>
+            
             <h:form>
                 <p:menubar>  
-                    <p:submenu label="File" icon="ui-icon-document">  
-                        <p:submenu label="New" icon="ui-icon-contact">  
-                            <p:menuitem value="Project" url="AmbienteEditar.xhtml" />  
-                            <p:menuitem value="Other" url="AmbienteListagem.xhtml" />  
-                        </p:submenu> 
-                         
-                        <p:menuitem value="Quit" url="#" />  
+                    <p:submenu label="Eventos">  
+                        <p:menuitem value="Novo" action="${eventoController.novo()}" /> 
+                        <p:menuitem value="Listagem" action="${eventoController.filtrar()}" />
                     </p:submenu>  
-                    <p:submenu label="Edit" icon="ui-icon-pencil">  
-                        <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />  
-                        <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />  
+                    <p:submenu label="Ambientes">
+                        <p:menuitem value="Novo" action="${ambienteController.novo()}" />
+                        <p:menuitem value="Listagem" action="${ambienteController.filtrar()}" />  
                     </p:submenu>  
-                    <p:submenu label="Help" icon="ui-icon-help">  
-                        <p:menuitem value="Contents" url="#" />  
-                        <p:submenu label="Search" icon="ui-icon-search">  
-                            <p:submenu label="Text">  
-                                <p:menuitem value="Workspace" url="#" />  
-                            </p:submenu>  
-                            <p:menuitem value="File" url="#" />  
-                        </p:submenu>  
-                    </p:submenu> 
-                    <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+                    <p:submenu label="Parceiros">
+                        <p:menuitem value="Novo" action="${parceiroController.novo()}" />
+                        <p:menuitem value="Listagem" action="${parceiroController.filtrar()}" />  
+                    </p:submenu>  
                 </p:menubar>  
             </h:form>
         </div>
         
         
-        <div id="content" class="left_content">
-            <ui:insert name="content"></ui:insert>
-        </div>
+        
+        <ui:insert name="content"></ui:insert>
+        
         <div id="bottom">
             Copyright IFNMG 2013 - Desenvolvido por Rodrigo Azevedo Martins
         </div>

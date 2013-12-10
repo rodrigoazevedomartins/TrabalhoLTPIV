@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form>
+            
+            <p:dataTable value="${eventoController.listaEvento}" var="evento" emptyMessage="Registros não Encontrados!" 
+                         style="margin-top: 20px;" paginator="true" rows="20" paginatorPosition="top">
+                
+                <f:facet name="header">  
+                    LISTA DE EVENTOS CADASTRADOS 
+                </f:facet>
+
+                <p:column sortBy="nome" headerText="Nome">
+                    ${evento.nome}
+                </p:column>
+
+                <p:column sortBy="descricao" headerText="Descrição">
+                    ${evento.descricao}
+                </p:column>
+
+                 <p:column sortBy="ambiente" headerText="Ambiente">
+                     ${evento.ambiente.nome}
+                 </p:column>
+
+                 <p:column sortBy="categoria" headerText="Categoria">
+                     ${evento.categoria.nome}
+                 </p:column>
+
+                 <p:column sortBy="inicio" headerText="Data/Hora de Início">
+                     <h:outputLabel value="${evento.inicio}" converter="AtividadeConverter" />
+                 </p:column>
+
+                <p:column sortBy="termino" headerText="Data/Hora de Término">
+                    <h:outputLabel value="${evento.termino}" converter="AtividadeConverter" />
+                </p:column>
+            
+                <p:column>
+                    <p:commandButton  value="Comprar Ingressos" ajax="false" action="${compraController.selecionaIngresso()}">
+                        <f:setPropertyActionListener target="${compraController.ingresso.evento}" value="${evento}"/>
+                    </p:commandButton>
+                </p:column>
+                
+            </p:dataTable>
+            <br/>
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

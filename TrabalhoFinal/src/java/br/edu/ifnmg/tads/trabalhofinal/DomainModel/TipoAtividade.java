@@ -9,7 +9,7 @@ package br.edu.ifnmg.tads.trabalhofinal.DomainModel;
  * @author Rodrigo
  */
 public enum TipoAtividade {
-    Vazio("", 0),
+    Vazio("Selecione", 0),
     Palestra("Paletra", 1),
     Minicurso("Minicurso", 2),
     Abertura("Abertura", 3),

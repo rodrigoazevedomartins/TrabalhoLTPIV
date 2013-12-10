@@ -31,24 +31,39 @@ public class AtividadeDAO extends DAOGenerico<Atividade> implements AtividadeRep
         
         HashMap<String, Object> param = new HashMap<String, Object>();
         
+        filtro = " a.evento.eventoid=:eventoid";
+        param.put("eventoid", atividade.getEvento().getEventoid());
+        
+        
         if (atividade != null){
             if(atividade.getNome() != null && atividade.getNome().length() > 0){
+                if(filtro.length() > 0){
+                    filtro += " and ";
+                }
                 filtro += "a.nome =:nome";
                 param.put("nome", atividade.getNome());
             }
             
             if(atividade.getDescricao() != null && atividade.getDescricao().length() > 0){
+                if(filtro.length() > 0){
+                    filtro += " and ";
+                }
                 filtro += "a.descricao =:descricao";
                 param.put("descricao", atividade.getDescricao());
             }
             
             if(atividade.getLocal() != null && atividade.getLocal().length() > 0){
+                if(filtro.length() > 0){
+                    filtro += " and ";
+                }
                 filtro += "a.local =:local";
                 param.put("local", atividade.getLocal());
             }
             
             if(atividade.getTipoatividade().getTipoAtividadeId() > 0){
-                System.out.println(atividade.getTipoatividade().getTipoAtividadeId());
+                if(filtro.length() > 0){
+                    filtro += " and ";
+                }
                 filtro += "a.tipoatividade=:tipoatividadeid";
                 param.put("tipoatividadeid", atividade.getTipoatividade());
             }

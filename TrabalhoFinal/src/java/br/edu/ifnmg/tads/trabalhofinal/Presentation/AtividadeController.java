@@ -58,12 +58,14 @@ public class AtividadeController implements Serializable{
     
     public String limparfiltros(){
         filtro = new Atividade();
+        filtro.setEvento(atividade.getEvento());
         listaAtividade = dao.buscarAtividade(filtro);
         return "AtividadeListagem.xhtml";
     }
         
     public String novo(){
         atividade = new Atividade();
+        atividade.setEvento(filtro.getEvento());
         return "AtividadeEditar.xhtml";
     }
     
@@ -102,6 +104,7 @@ public class AtividadeController implements Serializable{
     public List<Atividade> getListaAtividade(){
         if(listaAtividade == null){
             Atividade filtro = new Atividade();
+            filtro.setEvento(atividade.getEvento());
             listaAtividade = dao.buscarAtividade(filtro);
         }
         

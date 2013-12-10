@@ -28,17 +28,22 @@ public class Organizador extends Pessoa implements Serializable {
     
     @Column(name = "razaosocial", length = 255)
     private String razaosocial;
-
-    public Organizador(int cnpj, String descricao, String razaosocial) {
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
+    public Organizador(int cnpj, String descricao, String razaosocial, int ativo) {
         this.cnpj = cnpj;
         this.descricao = descricao;
         this.razaosocial = razaosocial;
+        this.ativo = ativo;
     }
 
     public Organizador() {
         this.cnpj = 0;
         this.descricao = "";
         this.razaosocial = "";
+        this.ativo = 1;
     }
         
     public int getCnpj() {
@@ -65,6 +70,14 @@ public class Organizador extends Pessoa implements Serializable {
         this.razaosocial = razaosocial;
     }
 
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

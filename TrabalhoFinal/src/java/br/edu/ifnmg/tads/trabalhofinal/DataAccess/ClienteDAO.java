@@ -23,7 +23,7 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
     
     public Cliente Login(Cliente cliente){
                   
-            String consulta = "select c from Cliente c";
+            String consulta = "select c from Cliente c where c.ativo = 1";
             
             String filtro = "";
             
@@ -38,13 +38,13 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
             }
             
             if(filtro.length() > 0){
-                consulta = consulta + " where " + filtro;
+                consulta = consulta + " and " + filtro;
             }
             
             Query query = manager.createQuery(consulta);
             
             for(String par : param.keySet()){
-                query.setParameter(par, param.get(param));
+                query.setParameter(par, param.get(par));
             }
             
             System.out.println(query);

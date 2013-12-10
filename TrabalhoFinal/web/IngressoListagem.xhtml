@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+       
+        <h:form>
+                <p:panelGrid columns="3" style="background-color: #ffffff;">
+                    <f:facet name="header">  
+                        FILTROS 
+                    </f:facet>  
+                    <h:outputLabel value="Nome.:" />
+                    <h:outputLabel value="Descrição.:" />
+                    <h:outputLabel value="Setor.:" />
+                                        
+                    <p:inputText value="${ingressoController.filtro.nome}" />  
+
+                    <p:inputText value="${ingressoController.filtro.descricao}" />  
+                    
+                    <p:selectOneMenu value="${ingressoController.filtro.setor}" converter="${setorConverter}" style="width: 150px">  
+                        <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled=""/>
+                        <f:selectItems value="${ingressoController.listaSetor}"/>
+                    </p:selectOneMenu>
+                    
+                    
+                    <f:facet name="footer">  
+                        <p:commandButton ajax="false" value="Novo Ingresso" action="${ingressoController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" action="${ingressoController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${ingressoController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        
+                    </f:facet>  
+                    
+                </p:panelGrid>
+        </h:form>
+        
+        <p:dataTable value="${ingressoController.listaIngresso}" var="ingresso" emptyMessage="Registros não Encontrados!" style="margin-top: 20px;">
+            <f:facet name="header">  
+                LISTA DE INGRESSOS CADASTRADOS 
+            </f:facet> 
+            <p:column sortBy="nome" headerText="Nome">
+                ${ingresso.nome}
+            </p:column>
+            
+            <p:column sortBy="descricao" headerText="Descrição">
+                ${ingresso.descricao}
+            </p:column>
+            
+             <p:column sortBy="iniciovenda" headerText="Início da Venda">
+                 <h:outputLabel value="${ingresso.iniciovenda}" converter="AtividadeConverter" />
+             </p:column>
+            
+             <p:column sortBy="fimvenda" headerText="Término da Venda">
+                  <h:outputLabel value="${ingresso.fimvenda}" converter="AtividadeConverter" />
+             </p:column>
+            
+            <p:column sortBy="setor" headerText="Setor">
+                ${ingresso.setor.nome}
+            </p:column>
+            
+            <p:column headerText="Ações">
+                
+                <h:form>
+                    <p:commandButton  value="Editar" ajax="false" action="${ingressoController.editar()}">
+                        <f:setPropertyActionListener target="${ingressoController.ingresso}" value="${ingresso}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();">
+                        <f:setPropertyActionListener target="${ingressoController.ingresso}" value="${ingresso}"/>
+                    </p:commandButton>                    
+                    
+                    <p:confirmDialog id="confirmaExcluir" message="Deseja realmente Excluir os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgExcluir">
+                        <p:commandButton ajax="false" value="SIM" action="${ingressoController.apagar()}" />
+                            
+                        <p:commandButton ajax="false" value="NÃO" onclick="msgExcluir.hide()" />                    
+                    </p:confirmDialog>
+
+                </h:form>
+            </p:column>
+            
+        </p:dataTable>
+        
+        
+    </ui:define>
+
+</ui:composition>

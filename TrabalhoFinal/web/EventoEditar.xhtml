@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        
+         <h:form>
+                        <p:panel>
+                                Dados Cadastrais
+                        </p:panel>
+                        <h:panelGrid columns="2" cellpadding="10">
+                            
+                            <h:outputLabel value="Nome.:"/>
+                            <p:inputText value="#{eventoController.evento.nome}" required="true" size="71"/>  
+                        
+                        </h:panelGrid>
+                         
+                         <h:panelGrid columns="2" cellpadding="10">
+                
+                            <h:outputLabel value="Descrição.:"/>
+                            <p:inputTextarea value="#{eventoController.evento.descricao}" required="true" rows="6" cols="70"/>  
+                        
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="4" cellpadding="10">
+                
+                            <h:outputLabel value="Início.: "/>
+                            <p:inputMask value="#{eventoController.evento.inicio}" required="true" size="20" mask="99/99/9999 99:99" converter="AtividadeConverter"/>  
+                        
+                            <h:outputLabel value="Término.: " style="margin-left: 20px"/>
+                            <p:inputMask value="#{eventoController.evento.termino}" required="true" size="20" mask="99/99/9999 99:99" converter="AtividadeConverter"/>  
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="4" cellpadding="10">
+                            <h:outputLabel value="Ambiente.:" />
+                            <p:selectOneMenu value="${eventoController.evento.ambiente}" required="true" converter="${ambienteConverter}">
+                                <f:selectItems value="${eventoController.listaAmbiente}" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        
+                        
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputLabel value="Categoria.:"/>
+                            <p:selectOneMenu value="${eventoController.evento.categoria}" required="true" converter="${categoriaConverter}">
+                                <f:selectItems value="${eventoController.listaCategoria}" var="categoria" itemLabel="${categoria.nome}"/>
+                            </p:selectOneMenu>    
+                        </h:panelGrid>
+                        
+             
+                        <p:panel id="Rodape">
+                            <p:commandButton value="Cadastrar" onclick="msgSalvar.show();" />
+                            <p:commandButton value="Cancelar" onclick="msgCancelar.show();" />                
+                                       
+                        </p:panel>       
+                        <p:confirmDialog id="confirmaSalvar" message="Deseja realmente Salvar os Dados?" header="Confirmação"
+                                 severity="alert" widgetVar="msgSalvar">
+                            <p:commandButton ajax="false" value="SIM" action="${eventoController.salvar()}" />
+                            <p:commandButton ajax="false" value="NÃO" onclick="msgSalvar.hide()" />                    
+                        </p:confirmDialog>
+            
+                        <p:confirmDialog id="cancelaSalvar" message="Deseja cancelar o cadastro?" header="Confirmação"
+                                 severity="alert" widgetVar="msgCancelar">
+                            <p:commandButton ajax="false" value="SIM" action="${eventoController.voltaPagina()}" />
+                            <p:commandButton ajax="false" value="NÃO" onclick="msgCancelar.hide()"/>
+                        </p:confirmDialog>
+               
+        </h:form>
+        
+        
+    </ui:define>
+
+</ui:composition>

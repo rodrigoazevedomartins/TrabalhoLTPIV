@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./index.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="content">
+        
+        <p:dataTable value="${compraController.compra.ingressos}" var="ingresso" emptyMessage="Registros não Encontrados!" 
+                         style="margin-top: 20px;" paginator="true" rows="20" paginatorPosition="top">
+                
+                <f:facet name="header">  
+                    LISTA DE EVENTOS CADASTRADOS 
+                </f:facet>
+
+                <p:column sortBy="nome" headerText="Nome">
+                    ${ingresso.ingresso.nome}
+                </p:column>
+                
+            
+        </p:dataTable>
+            <h:outputLabel value="${compraController.valorTotal}"/>
+        <h:form>
+                
+                
+                <p:commandButton ajax="false" value="Fechar Compra" action="${compraController.salvar()}" />
+                <p:commandButton ajax="false" value="Continuar Compra" action="${compraController.voltaPagina()}"/>
+                
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>
