@@ -13,4 +13,6 @@ import javax.ejb.Local;
 @Local
 public interface OrganizadorRepositorio extends RepositorioGenerico<Organizador>{
     
+    public Organizador Login(Organizador organizador);
+    
 }

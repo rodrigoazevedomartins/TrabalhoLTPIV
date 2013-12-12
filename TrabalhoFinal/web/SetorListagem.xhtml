@@ -23,9 +23,9 @@
                     <p:inputText value="${setorController.filtro.capacidade}" />  
                     
                     <f:facet name="footer">  
-                        <p:commandButton ajax="false" value="Novo Setor" action="${setorController.novo()}" style="float: right"/>
-                        <p:commandButton ajax="false" value="Limpar Filtros" action="${setorController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
-                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${setorController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        <p:commandButton ajax="false" value="Novo Setor" icon="ui-icon-plusthick" action="${setorController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" icon="ui-icon-minusthick" action="${setorController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-search" action="${setorController.filtrar()}" style="float: right; margin-right: 10px"/>  
                         
                     </f:facet>
                     
@@ -52,11 +52,11 @@
             <p:column headerText="Ações">
                 
                 <h:form>
-                    <p:commandButton  value="Editar" ajax="false" action="${setorController.editar()}">
+                    <p:commandButton  value="Editar" ajax="false" action="${setorController.editar()}" icon="ui-icon-pencil">
                         <f:setPropertyActionListener target="${setorController.setor}" value="${setor}"/>
                     </p:commandButton>
                     
-                    <p:commandButton  value="Apagar" ajax="false" action="${setorController.apagar()}">
+                    <p:commandButton  value="Excluir" ajax="false" action="${setorController.apagar()}" icon="ui-icon-closethick">
                         <f:setPropertyActionListener target="${setorController.setor}" value="${setor}"/>
                     </p:commandButton>                    
                 

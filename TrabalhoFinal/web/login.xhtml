@@ -15,19 +15,23 @@ and open the template in the editor.
         <div>
             <h:form>
                 <h:panelGrid columns="2" cellpadding="10">
+                    <f:facet name="header">
+                        Autenticação
+                    </f:facet>
                     <h:outputLabel value="Login.:"/>
-                    <p:inputText value="#{clienteAutenticacaoController.login.login}" required="true"/>
+                    <p:inputText value="#{clienteAutenticacaoController.login.login}"/>
                 
                     <h:outputLabel value="Senha.:"/>
-                    <p:password value="#{clienteAutenticacaoController.login.senha}" required="true"/>
+                    <p:password value="#{clienteAutenticacaoController.login.senha}"/>
                 
                     <p:commandButton value="Login" onclick="msgLogin.show()" />
                     
+                    <p:commandButton value="Novo Cliente" action="#{clienteController.novo()}"/>
                     
-                    <p:confirmDialog id="confirmaSalvar" message="Deseja realmente Salvar os Dados?" header="Confirmação"
+                    <p:confirmDialog id="confirmaSalvar" message="Deseja realizar Login?" header="Confirmação"
                                  severity="alert" widgetVar="msgLogin">
                         <p:commandButton ajax="false" value="SIM" action="${clienteAutenticacaoController.validar()}" />
-                        <p:commandButton ajax="false" value="NÃO" onclick="msgSalvar.hide()" />                    
+                        <p:commandButton ajax="false" value="NÃO" onclick="msgLogin.hide()" />                    
                     </p:confirmDialog>
                 </h:panelGrid>
             </h:form>

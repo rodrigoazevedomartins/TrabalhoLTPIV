@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./index.xhtml"
+                template="./indexCliente.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
 
@@ -23,7 +23,7 @@
             <h:inputText value="#{compraController.qtdeComprada}" required="true" size="20"/>
         </h:panelGrid>
         
-        <p:commandButton ajax="false" value="Adicionar a Lista" action="${compraController.adicionaIngressoLista()}" />
+            <p:commandButton ajax="false" value="Adicionar a Lista" action="${compraController.adicionaIngressoLista()}" icon="ui-icon-check"/>
         </h:form>
     </ui:define>
 

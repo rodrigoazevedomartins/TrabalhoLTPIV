@@ -22,7 +22,7 @@ public class OrganizadorDAO extends DAOGenerico<Organizador> implements Organiza
         super(Organizador.class);    
     }
     
-    public boolean Login(Organizador organizador){
+    public Organizador Login(Organizador organizador){
         
         String consulta = "select o from Organizador o where o.ativo = 1";
         
@@ -49,9 +49,9 @@ public class OrganizadorDAO extends DAOGenerico<Organizador> implements Organiza
             }
             
             if(query.getResultList() != null){
-                return true;
+                return (Organizador) query.getSingleResult();
             } else {
-                return false;
+                return null;
             }
     }
     

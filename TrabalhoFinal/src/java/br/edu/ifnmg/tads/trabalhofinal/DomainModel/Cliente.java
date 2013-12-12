@@ -22,15 +22,20 @@ public class Cliente extends Pessoa implements Serializable {
     
     @Column(name = "rg", length = 255)
     private String rg;
-
-    public Cliente(int cpf, String rg) {
+    
+    @Column(name = "ativo", length = 1)
+    private int ativo;
+    
+    public Cliente(int cpf, String rg, int ativo) {
         this.cpf = cpf;
         this.rg = rg;
+        this.ativo = ativo;
     }
     
     public Cliente() {
         this.cpf = 0;
         this.rg = "";
+        this.ativo = 1;
     }
     
     public int getCpf() {
@@ -47,6 +52,14 @@ public class Cliente extends Pessoa implements Serializable {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+    
+    public int getAtivo(){
+        return this.ativo;
+    }
+    
+    public void setAtivo(int ativo){
+        this.ativo = ativo;
     }
 
     @Override

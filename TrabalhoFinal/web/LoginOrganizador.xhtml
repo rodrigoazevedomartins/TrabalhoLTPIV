@@ -3,15 +3,16 @@
 To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Login</title>
     </h:head>
     <body>
+        <ui>
         <div>
             <h:form>
                 <h:panelGrid columns="2" cellpadding="10">
@@ -19,23 +20,24 @@ and open the template in the editor.
                         Autenticação
                     </f:facet>
                     <h:outputLabel value="Login.:"/>
-                    <p:inputText value="#{clienteAutenticacaoController.login.login}"/>
+                    <p:inputText value="#{organizadorAutenticacaoController.login.login}" required="true"/>
                 
                     <h:outputLabel value="Senha.:"/>
-                    <p:password value="#{clienteAutenticacaoController.login.senha}"/>
+                    <p:password value="#{organizadorAutenticacaoController.login.senha}" required="true"/>
                 
                     <p:commandButton value="Login" onclick="msgLogin.show()" />
                     
-                    <p:commandButton value="Novo Cliente" action="#{clienteController.novo()}"/>
+                    <p:commandButton value="Novo Organizador" action="${organizadorController.novo()}"/>
                     
                     <p:confirmDialog id="confirmaSalvar" message="Deseja realizar Login?" header="Confirmação"
                                  severity="alert" widgetVar="msgLogin">
-                        <p:commandButton ajax="false" value="SIM" action="${clienteAutenticacaoController.validar()}" />
+                        <p:commandButton ajax="false" value="SIM" action="${organizadorAutenticacaoController.validar()}" />
                         <p:commandButton ajax="false" value="NÃO" onclick="msgLogin.hide()" />                    
                     </p:confirmDialog>
                 </h:panelGrid>
             </h:form>
             
         </div>
+        </ui>
     </body>
 </html>

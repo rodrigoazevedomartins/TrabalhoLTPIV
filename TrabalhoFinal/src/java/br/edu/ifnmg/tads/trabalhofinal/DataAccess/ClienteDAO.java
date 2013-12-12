@@ -47,8 +47,6 @@ public class ClienteDAO extends DAOGenerico<Cliente> implements ClienteRepositor
                 query.setParameter(par, param.get(par));
             }
             
-            System.out.println(query);
-            
             if(query.getSingleResult()!= null){
                 return (Cliente) query.getSingleResult();
             } else {

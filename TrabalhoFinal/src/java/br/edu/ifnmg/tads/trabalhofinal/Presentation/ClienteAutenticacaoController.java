@@ -55,7 +55,7 @@ public class ClienteAutenticacaoController implements Serializable{
             sessao = (HttpSession) ctx.getExternalContext().getSession(false);
             sessao.setAttribute("clienteAutenticado", cliente);
             exibirMensagem("OK");
-            return "index.xhtml";
+            return "indexCliente.xhtml";
         }
         
         } catch (Exception ex) {
@@ -69,9 +69,6 @@ public class ClienteAutenticacaoController implements Serializable{
     }
         
     public Cliente getLogin(){
-        if(login == null){
-            login = new Cliente();
-        }
         return this.login;
     }
     

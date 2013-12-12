@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./index.xhtml"
+                template="./indexCliente.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html">
@@ -12,20 +12,31 @@
                          style="margin-top: 20px;" paginator="true" rows="20" paginatorPosition="top">
                 
                 <f:facet name="header">  
-                    LISTA DE EVENTOS CADASTRADOS 
+                    LISTA DE INGRESSOS COMPRADOS 
                 </f:facet>
 
                 <p:column sortBy="nome" headerText="Nome">
                     ${ingresso.ingresso.nome}
                 </p:column>
-                
+            
+                <p:column sortBy="setor" headerText="Setor">
+                    ${ingresso.ingresso.setor}
+                </p:column>
+            
+                <p:column sortBy="nome" headerText="Quantidade">
+                    ${ingresso.ingresso.quantidade}
+                </p:column>
+            
             
         </p:dataTable>
-            <h:outputLabel value="${compraController.valorTotal}"/>
+        
+        <br/><br/>
+        <h:outputLabel value="Total da Compra.:" style="font-size: 14px; color: #666;"/>
+        <h:outputLabel value="${compraController.valorTotal}"/>
         <h:form>
                 
-                
-                <p:commandButton ajax="false" value="Fechar Compra" action="${compraController.salvar()}" />
+                <br/><br/>
+                <p:commandButton ajax="false" value="Fechar Compra" action="${compraController.salvar()}" icon="ui-icon-check"/>
                 <p:commandButton ajax="false" value="Continuar Compra" action="${compraController.voltaPagina()}"/>
                 
         </h:form>

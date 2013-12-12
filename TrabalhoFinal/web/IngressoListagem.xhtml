@@ -28,9 +28,9 @@
                     
                     
                     <f:facet name="footer">  
-                        <p:commandButton ajax="false" value="Novo Ingresso" action="${ingressoController.novo()}" style="float: right"/>
-                        <p:commandButton ajax="false" value="Limpar Filtros" action="${ingressoController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
-                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${ingressoController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        <p:commandButton ajax="false" value="Novo Ingresso" icon="ui-icon-plusthick" action="${ingressoController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" icon="ui-icon-minusthick" action="${ingressoController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-search" action="${ingressoController.filtrar()}" style="float: right; margin-right: 10px"/>  
                         
                     </f:facet>  
                     
@@ -64,11 +64,11 @@
             <p:column headerText="Ações">
                 
                 <h:form>
-                    <p:commandButton  value="Editar" ajax="false" action="${ingressoController.editar()}">
+                    <p:commandButton  value="Editar" ajax="false" action="${ingressoController.editar()}" icon="ui-icon-pencil">
                         <f:setPropertyActionListener target="${ingressoController.ingresso}" value="${ingresso}"/>
                     </p:commandButton>
                     
-                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();">
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();" icon="ui-icon-closethick">
                         <f:setPropertyActionListener target="${ingressoController.ingresso}" value="${ingresso}"/>
                     </p:commandButton>                    
                     

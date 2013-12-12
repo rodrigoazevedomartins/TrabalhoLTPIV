@@ -72,6 +72,7 @@ public class CompraController implements Serializable{
     public String adicionaIngressoLista(){
         for(int x=1; x<=qtdecompr; x++){
             CompraIngresso ci = new CompraIngresso();
+            ingressoCompra.setQuantidade(qtdecompr);
             ci.setIngresso(ingressoCompra);
             ci.setCompra(compra);
             compra.addIngresso(ci);

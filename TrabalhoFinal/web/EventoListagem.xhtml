@@ -33,9 +33,9 @@
                     
                     
                     <f:facet name="footer">  
-                        <p:commandButton ajax="false" value="Novo Evento" action="${eventoController.novo()}" style="float: right"/>
-                        <p:commandButton ajax="false" value="Limpar Filtros" action="${eventoController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
-                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-check" action="${eventoController.filtrar()}" style="float: right; margin-right: 10px"/>  
+                        <p:commandButton ajax="false" value="Novo Evento" icon="ui-icon-plusthick" action="${eventoController.novo()}" style="float: right"/>
+                        <p:commandButton ajax="false" value="Limpar Filtros" icon="ui-icon-minusthick" action="${eventoController.limparfiltros()}" style="float: right; margin-right: 10px;"/>
+                        <p:commandButton ajax="false" value="Filtrar" icon="ui-icon-search" action="${eventoController.filtrar()}" style="float: right; margin-right: 10px"/>  
                         
                     </f:facet>  
                     
@@ -74,15 +74,15 @@
             <p:column headerText="Ações">
                 
                 <h:form>
-                    <p:commandButton  value="Editar" ajax="false" action="${eventoController.editar()}">
+                    <p:commandButton  value="Editar" ajax="false" action="${eventoController.editar()}" icon="ui-icon-pencil">
                         <f:setPropertyActionListener target="${eventoController.evento}" value="${evento}"/>
                     </p:commandButton>
                     
-                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();">
+                    <p:commandButton  value="Excluir" onclick="msgExcluir.show();" icon="ui-icon-closethick">
                         <f:setPropertyActionListener target="${eventoController.evento}" value="${evento}"/>
                     </p:commandButton>
                     
-                    <p:commandButton  value="Ingressos" ajax="false" action="${ingressoController.filtrar()}">
+                    <p:commandButton  value="Ingressos" ajax="false" action="${ingressoController.filtrar()}" icon="ui-icon-folder-open">
                         <f:setPropertyActionListener target="${ingressoController.ingresso.evento}" value="${evento}"/>
                         <f:setPropertyActionListener target="${ingressoController.filtro.evento}" value="${evento}"/>
                     </p:commandButton>
